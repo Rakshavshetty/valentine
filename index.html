@@ -15,7 +15,6 @@ body{
     overflow-x:hidden;
 }
 
-/* START HEART */
 #start{
     height:100vh;
     display:flex;
@@ -25,38 +24,48 @@ body{
 }
 
 .bigHeart{
-    font-size:100px;
+    font-size:90px;
     cursor:pointer;
-    animation:pulse 1.2s infinite;
+    animation:pulse 1s infinite;
 }
 
 @keyframes pulse{
     0%{transform:scale(1);}
-    50%{transform:scale(1.3);}
+    50%{transform:scale(1.2);}
     100%{transform:scale(1);}
 }
 
-/* MAIN CONTENT */
-#main{ display:none; padding:20px; }
-
-h1{
-    font-size:40px;
-    text-shadow:0 0 20px white;
+.burst{
+    animation:explode 0.7s forwards;
 }
 
-.photo{
-    width:140px;
-    height:140px;
+@keyframes explode{
+    100%{transform:scale(6); opacity:0;}
+}
+
+#main{ display:none; }
+
+.heart-fall{
+    position:fixed;
+    top:-10px;
+    font-size:24px;
+    animation: fall 6s linear infinite;
+}
+
+@keyframes fall{
+    to{ transform: translateY(110vh); }
+}
+
+.container{ padding:40px; }
+
+.photo-heart{
+    width:130px;
+    height:130px;
     border-radius:50%;
-    margin:15px;
     border:4px solid white;
+    margin:15px;
     cursor:pointer;
     object-fit:cover;
-    transition:.3s;
-}
-
-.photo:hover{
-    transform:scale(1.1);
 }
 
 .note{
@@ -65,71 +74,101 @@ h1{
     margin-top:20px;
 }
 
-/* Falling Hearts */
-.heart{
-    position:fixed;
-    top:-10px;
-    font-size:22px;
-    animation:fall linear infinite;
+button{
+    padding:12px 25px;
+    font-size:18px;
+    border:none;
+    border-radius:30px;
+    background:white;
+    color:#ff4b6e;
+    cursor:pointer;
+    margin-top:30px;
 }
 
-@keyframes fall{
-    to{ transform: translateY(100vh); }
+.timeline{
+    margin-top:50px;
+    font-size:20px;
+    line-height:1.8;
+}
+
+.final{
+    display:none;
+    font-size:28px;
+    margin-top:30px;
 }
 </style>
 </head>
 
 <body>
 
-<!-- FIRST HEART SCREEN -->
 <div id="start">
     <div class="bigHeart" onclick="openPage()">❤️</div>
     <p>Tap my heart ❤️</p>
 </div>
 
-<!-- MAIN PAGE -->
 <div id="main">
 
-<h1>Happy Valentine's Day ❤️</h1>
-<p>Tap photos to see my heart 💕</p>
+<script>
+for(let i=0;i<40;i++){
+    let heart=document.createElement("div");
+    heart.innerHTML="❤️";
+    heart.className="heart-fall";
+    heart.style.left=Math.random()*100+"%";
+    heart.style.animationDuration=(3+Math.random()*5)+"s";
+    document.body.appendChild(heart);
+}
+</script>
 
-<img src="https://i.ibb.co/4nNnpVys/IMG-20260212-154150.png" class="photo" onclick="show(1)">
-<img src="https://i.ibb.co/k2kF18Wq/IMG-20260212-154036.jpg" class="photo" onclick="show(2)">
-<img src="https://i.ibb.co/dRF0zjN/IMG-20251211-173620-112.jpg" class="photo" onclick="show(3)">
-<img src="https://i.ibb.co/zykFB1k/IMG-20250301-WA0042.jpg" class="photo" onclick="show(4)">
-<img src="https://i.ibb.co/Q77G48Kp/Screenshot-2025-12-12-09-31-50-82-1c337646f29875672b5a61192b9010f9.jpg" class="photo" onclick="show(5)">
+<div class="container">
 
-<div id="n1" class="note">Since November 2024, you became my favorite person ❤️</div>
-<div id="n2" class="note">Distance means nothing because you mean everything 💕</div>
-<div id="n3" class="note">Every memory with you is my most precious treasure 🥰</div>
-<div id="n4" class="note">You are my comfort, my happiness, my home ❤️</div>
-<div id="n5" class="note">I love you more today, tomorrow, forever 💖</div>
+<h1>❤️ Happy Valentine's Day My Cutie ❤️</h1>
+<p>From your Baby 💕</p>
+<p>Tap each photo to reveal my heart 🥰</p>
 
+<img src="https://i.postimg.cc/R3W9fh2p/Whats-App-Image-2026-02-12-at-15-42-16.jpg" class="photo-heart" onclick="show(1)">
+<img src="https://i.postimg.cc/GB6RjrCw/Whats-App-Image-2026-02-12-at-15-42-17.jpg" class="photo-heart" onclick="show(2)">
+<img src="https://i.postimg.cc/McgwYxSx/Whats-App-Image-2026-02-12-at-15-42-17-(1).jpg" class="photo-heart" onclick="show(3)">
+<img src="https://i.postimg.cc/t1syPJ8f/Whats-App-Image-2026-02-12-at-15-42-18.jpg" class="photo-heart" onclick="show(4)">
+
+<div id="n1" class="note">Since November 2024, you became my favorite person in this world.</div>
+<div id="n2" class="note">Distance means nothing because you mean everything.</div>
+<div id="n3" class="note">Every memory with you is my most precious treasure.</div>
+<div id="n4" class="note">You are my comfort, my happiness, and my safest place.</div>
+
+<button onclick="final()">Open Final Surprise 💖</button>
+
+<div id="final" class="final">
+You are my home, my peace, my happiness.<br>
+No matter the distance, my heart is always with you.<br><br>
+✨ Forever yours — Your Baby ✨
+</div>
+
+<div class="timeline">
+<h2>💞 Our Love Timeline</h2>
+November 2024 — Our beautiful journey began ❤️<br>
+Every day since — Falling more in love with you 💕<br>
+Today — Still choosing you, always 💖
+</div>
+
+</div>
 </div>
 
 <script>
 function openPage(){
-    document.getElementById("start").style.display="none";
-    document.getElementById("main").style.display="block";
+    document.querySelector(".bigHeart").classList.add("burst");
+    setTimeout(()=>{
+        document.getElementById("start").style.display="none";
+        document.getElementById("main").style.display="block";
+    },700);
 }
 
-/* Show messages */
 function show(n){
     document.getElementById("n"+n).style.display="block";
 }
 
-/* Falling hearts */
-function createHeart(){
-    const heart=document.createElement("div");
-    heart.classList.add("heart");
-    heart.innerHTML="❤️";
-    heart.style.left=Math.random()*100+"vw";
-    heart.style.animationDuration=(3+Math.random()*3)+"s";
-    document.body.appendChild(heart);
-
-    setTimeout(()=>heart.remove(),5000);
+function final(){
+    document.getElementById("final").style.display="block";
 }
-setInterval(createHeart,300);
 </script>
 
 </body>

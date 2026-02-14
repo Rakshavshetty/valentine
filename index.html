@@ -3,115 +3,133 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Happy Valentine's Day ❤️</title>
+<title>For My Cutie ❤️</title>
 
 <style>
-body {
-    margin: 0;
-    padding: 0;
-    font-family: 'Segoe UI', sans-serif;
-    background: linear-gradient(135deg, #ff758c, #ff7eb3);
-    height: 100vh;
-    overflow: hidden;
-    text-align: center;
-    color: white;
+body{
+    margin:0;
+    font-family:'Segoe UI',sans-serif;
+    background: linear-gradient(120deg,#ff758c,#ff7eb3);
+    text-align:center;
+    color:white;
+    overflow-x:hidden;
 }
 
-/* Heart Button */
-#mainHeart {
-    font-size: 100px;
-    cursor: pointer;
-    margin-top: 150px;
-    animation: pulse 1.5s infinite;
+/* START HEART */
+#start{
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    flex-direction:column;
 }
 
-@keyframes pulse {
-    0% { transform: scale(1); }
-    50% { transform: scale(1.2); }
-    100% { transform: scale(1); }
+.bigHeart{
+    font-size:100px;
+    cursor:pointer;
+    animation:pulse 1.2s infinite;
 }
 
-/* Hidden Content */
-#content {
-    display: none;
-    padding: 20px;
+@keyframes pulse{
+    0%{transform:scale(1);}
+    50%{transform:scale(1.3);}
+    100%{transform:scale(1);}
 }
 
-h1 {
-    font-size: 45px;
-    animation: glow 2s infinite alternate;
+/* MAIN CONTENT */
+#main{ display:none; padding:20px; }
+
+h1{
+    font-size:40px;
+    text-shadow:0 0 20px white;
 }
 
-@keyframes glow {
-    from { text-shadow: 0 0 10px #fff; }
-    to { text-shadow: 0 0 25px #ff004f; }
+.photo{
+    width:140px;
+    height:140px;
+    border-radius:50%;
+    margin:15px;
+    border:4px solid white;
+    cursor:pointer;
+    object-fit:cover;
+    transition:.3s;
 }
 
-.message {
-    font-size: 22px;
-    margin-top: 20px;
+.photo:hover{
+    transform:scale(1.1);
+}
+
+.note{
+    display:none;
+    font-size:22px;
+    margin-top:20px;
 }
 
 /* Falling Hearts */
-.heart {
-    position: fixed;
-    top: -10px;
-    color: red;
-    font-size: 22px;
-    animation: fall linear infinite;
+.heart{
+    position:fixed;
+    top:-10px;
+    font-size:22px;
+    animation:fall linear infinite;
 }
 
-@keyframes fall {
-    to {
-        transform: translateY(100vh);
-    }
-}
-
-/* Mobile Responsive */
-@media(max-width:600px){
-    h1 { font-size: 32px; }
-    .message { font-size: 18px; }
+@keyframes fall{
+    to{ transform: translateY(100vh); }
 }
 </style>
 </head>
 
 <body>
 
-<!-- CLICK HEART -->
-<div id="mainHeart">❤️</div>
+<!-- FIRST HEART SCREEN -->
+<div id="start">
+    <div class="bigHeart" onclick="openPage()">❤️</div>
+    <p>Tap my heart ❤️</p>
+</div>
 
-<!-- SURPRISE CONTENT -->
-<div id="content">
-    <h1>Happy Valentine's Day 💖</h1>
-    
-    <p class="message">
-        From the moment you came into my life,<br>
-        everything became more beautiful ❤️<br><br>
-        You are my happiness, my peace,<br>
-        and my forever love 💕
-    </p>
+<!-- MAIN PAGE -->
+<div id="main">
+
+<h1>Happy Valentine's Day ❤️</h1>
+<p>Tap photos to see my heart 💕</p>
+
+<img src="https://i.ibb.co/4nNnpVys/IMG-20260212-154150.png" class="photo" onclick="show(1)">
+<img src="https://i.ibb.co/k2kF18Wq/IMG-20260212-154036.jpg" class="photo" onclick="show(2)">
+<img src="https://i.ibb.co/dRF0zjN/IMG-20251211-173620-112.jpg" class="photo" onclick="show(3)">
+<img src="https://i.ibb.co/zykFB1k/IMG-20250301-WA0042.jpg" class="photo" onclick="show(4)">
+<img src="https://i.ibb.co/Q77G48Kp/Screenshot-2025-12-12-09-31-50-82-1c337646f29875672b5a61192b9010f9.jpg" class="photo" onclick="show(5)">
+
+<div id="n1" class="note">Since November 2024, you became my favorite person ❤️</div>
+<div id="n2" class="note">Distance means nothing because you mean everything 💕</div>
+<div id="n3" class="note">Every memory with you is my most precious treasure 🥰</div>
+<div id="n4" class="note">You are my comfort, my happiness, my home ❤️</div>
+<div id="n5" class="note">I love you more today, tomorrow, forever 💖</div>
+
 </div>
 
 <script>
-document.getElementById("mainHeart").onclick = function() {
-    this.style.display = "none";
-    document.getElementById("content").style.display = "block";
-};
+function openPage(){
+    document.getElementById("start").style.display="none";
+    document.getElementById("main").style.display="block";
+}
 
-/* Falling hearts animation */
-function createHeart() {
-    const heart = document.createElement("div");
+/* Show messages */
+function show(n){
+    document.getElementById("n"+n).style.display="block";
+}
+
+/* Falling hearts */
+function createHeart(){
+    const heart=document.createElement("div");
     heart.classList.add("heart");
-    heart.innerHTML = "❤";
-    heart.style.left = Math.random() * 100 + "vw";
-    heart.style.animationDuration = Math.random() * 3 + 2 + "s";
+    heart.innerHTML="❤️";
+    heart.style.left=Math.random()*100+"vw";
+    heart.style.animationDuration=(3+Math.random()*3)+"s";
     document.body.appendChild(heart);
 
-    setTimeout(() => {
-        heart.remove();
-    }, 5000);
+    setTimeout(()=>heart.remove(),5000);
 }
-setInterval(createHeart, 300);
+setInterval(createHeart,300);
 </script>
 
 </body>
